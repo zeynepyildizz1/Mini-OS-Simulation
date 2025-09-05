@@ -47,7 +47,7 @@ int main() {
     process* frontProcess = nullptr;
     for (int i = runningProcess->getArrivalTime() + 10; i < wholeTime; i += 10) {
         
-        if (runningProcess != nullptr && runningProcess->getRunTime() >0) { //processin zamanını güncelle
+        if (runningProcess != nullptr && runningProcess->getRunTime() >0) { //update the process time
             int runTime = runningProcess->getRunTime() - 10;
             runningProcess->setRunTime(runTime);
         }
@@ -55,12 +55,12 @@ int main() {
             runningProcess = nullptr;
         }
         if (!allProcess.empty()) { 
-            frontProcess = allProcess.front(); // queueden gelen processi al
+            frontProcess = allProcess.front(); // get the process from the queue
 
-        }else if (!memWaitingQueue.empty()) { // gelen process yoksa memoryde bekleyen var mı bak
+        }else if (!memWaitingQueue.empty()) { // gif no process arrives, check for processes waiting in memory
             waitingProcess = memWaitingQueue.front();
 
-            if (mem.allocate(waitingProcess)) { // memoryde yer varsa yerleştir
+            if (mem.allocate(waitingProcess)) { // if there is available space in memory, allocate it
                 memWaitingQueue.pop();
                 frontProcess = waitingProcess;
                 logBoth(  "P" +to_string( frontProcess->getID() )+ " pushed on Q" + to_string(frontProcess->getPriority()) +"\n");
