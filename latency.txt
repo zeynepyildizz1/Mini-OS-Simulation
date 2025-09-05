@@ -1,0 +1,4 @@
+Latency for P2 is 70
+Latency for P1 is 120
+Latency for P3 is 130
+Latency for P4 is 120

@@ -1,0 +1,77 @@
+At t=0 P1 arrives with priority 3 memory size 32
+P1 allocated in memory
+
+--- Memory Layout ---
+[0-31] P1 (32)
+[32-63] FREE (32)
+---------------------
+
+At t=10 P2 arrives with priority 2 memory size 32
+P2 allocated in memory
+
+--- Memory Layout ---
+[0-31] P1 (32)
+[32-63] P2 (32)
+---------------------
+
+P1 pushed on S with runTime 40
+P2 preempted the CPU
+
+At t=20 P3 arrives with priority 1 memory size 35
+P3 cannot be allocated (no memory) It pushed to waiting queue
+
+At t = 40 P4 arrives with priority 2 memory size 16
+P4 cannot be allocated (no memory) It pushed to waiting queue
+
+t=80 P2 finished
+
+--- Memory Layout ---
+[0-31] P1 (32)
+[32-63] FREE (32)
+---------------------
+
+P1 popped from S
+
+t=120 P1 finished
+
+--- Memory Layout ---
+[0-63] FREE (64)
+---------------------
+
+P3 allocated in memory
+
+--- Memory Layout ---
+[0-34] P3 (35)
+[35-63] FREE (29)
+---------------------
+
+P3 pushed on Q1
+
+P3 popped from Q1
+
+P4 allocated in memory
+
+--- Memory Layout ---
+[0-34] P3 (35)
+[35-50] P4 (16)
+[51-63] FREE (13)
+---------------------
+
+P4 pushed on Q2
+
+t=150 P3 finished
+
+--- Memory Layout ---
+[0-34] FREE (35)
+[35-50] P4 (16)
+[51-63] FREE (13)
+---------------------
+
+P4 popped from Q2
+
+t=160 P4 finished
+
+--- Memory Layout ---
+[0-63] FREE (64)
+---------------------
+
